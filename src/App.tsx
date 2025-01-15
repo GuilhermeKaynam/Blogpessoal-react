@@ -6,11 +6,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="flex-1">
-        {" "}
-        {/* Isso faz o conteúdo principal ocupar o restante do espaço */}
-        <Home />
-      </div>
+      <Home />
       <Footer />
     </div>
   );
