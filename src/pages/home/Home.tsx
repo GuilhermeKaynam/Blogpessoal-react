@@ -4,7 +4,7 @@
       <div className="bg-gradient-to-r from-[#7B68EE] via-[#4B0082] to-[#A020F0] flex justify-center flex-1">
         <div className="container grid grid-cols-2 text-white">
           <div className="flex flex-col gap-4 items-center justify-center py-4">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400 bg-clip-text text-transparent">
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400 bg-clip-text text-transparent py-3">
               Seja Bem Vindo!
             </h2>
             <p className="text-xl">Expresse aqui seus pensamentos e opniões</p>

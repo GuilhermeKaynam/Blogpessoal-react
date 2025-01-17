@@ -1,0 +1,39 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+.fundoLogin {
+  background-image: url("./Login.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+}
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  background-color: #3b58d4;
+}
+
+@media (min-width: 1024px) {
+  /* Para telas maiores */
+  .login-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  form {
+    width: 80%;
+    max-width: 400px;
+  }
+}
