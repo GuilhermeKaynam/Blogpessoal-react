@@ -9,7 +9,7 @@ function Footer() {
 
   return (
     <>
-      <div className="flex justify-center bg-gradient-to-r from-[#4952ac] via-[#0a045e] to-[#5d3a96] text-white mt-auto relative py-8">
+      <div className="flex justify-center bg-gradient-to-r from-[#4952ac] via-[#0a045e] to-[#5d3a96] text-white mt-auto relative py-9">
         <div className="container flex flex-col items-center py-4 text-center">
           <p className="text-lg font-medium text-white">
             Blog Pessoal Guilherme Kaynam | Copyright: {data}
