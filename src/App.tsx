@@ -6,15 +6,16 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Cadastro from "./pages/cadastro/Cadastro";
 import { AuthProvider } from "./contexts/AuthContex";
-import ListaTemas from "./components/temas/listaTemas/ListaTemas";
-import FormTema from "./components/formtema/FormTema";
-import DeletarTema from "./components/deletartema/DeteltarTema";
 import ListaPostagens from "./postagens/listapostagens/ListaPostagens";
 import FormPostagem from "./postagens/formpostagem/FormPostagem";
 import DeletarPostagem from "./postagens/deletarpostagem/DeletarPostagem";
 import Perfil from "./pages/perfil/Perfil";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import ListaTemas from "./temas/listaTemas/ListaTemas";
+import FormTema from "./temas/formtema/FormTema";
+import DeletarTema from "./temas/deletartema/DeteltarTema";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="/postagens" element={<ListaPostagens />} />
               <Route path="/cadastrarpostagem" element={<FormPostagem />} />
               <Route path="/editarpostagem/:id" element={<FormPostagem />} />
+              <Route path="/ErrorPage" element={<ErrorPage />} />
               <Route
                 path="/deletarpostagem/:id"
                 element={<DeletarPostagem />}

@@ -62,7 +62,7 @@ function FormPostagem() {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado");
+      ToastAlerta("Você precisa estar logado", "info");
       navigate("/");
     }
   }, [token]);
@@ -82,7 +82,9 @@ function FormPostagem() {
     });
   }, [tema]);
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+  function atualizarEstado(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     setPostagem({
       ...postagem,
       [e.target.name]: e.target.value,
@@ -107,13 +109,13 @@ function FormPostagem() {
           },
         });
 
-        alert("Postagem atualizada com sucesso");
+        ToastAlerta("Postagem atualizada com sucesso", "sucesso");
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         if (error.toString().includes("403")) {
           handleLogout();
         } else {
-          alert("Erro ao atualizar a Postagem");
+          ToastAlerta("Erro ao atualizar a Postagem", "erro");
         }
       }
     } else {
@@ -124,13 +126,13 @@ function FormPostagem() {
           },
         });
 
-        alert("Postagem cadastrada com sucesso");
+        ToastAlerta("Postagem cadastrada com sucesso", "sucesso");
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         if (error.toString().includes("403")) {
           handleLogout();
         } else {
-          ToastAlerta("error", "Erro ao cadastrar a Postagem");
+          ToastAlerta("Erro ao cadastrar a Postagem", "erro");
         }
       }
     }
@@ -142,73 +144,99 @@ function FormPostagem() {
   const carregandoTema = tema.descricao === "";
 
   return (
-    <div className="container flex flex-col mx-auto items-center">
-      <h1 className="text-4xl text-center my-8">
+    <div className="container mx-auto flex flex-col items-center p-6 bg-white rounded-xl shadow-lg max-w-3xl mt-12">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         {id !== undefined ? "Editar Postagem" : "Cadastrar Postagem"}
       </h1>
 
-      <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovaPostagem}>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Título da Postagem</label>
+      <form className="w-full space-y-6" onSubmit={gerarNovaPostagem}>
+        {/* Título da Postagem */}
+        <div className="flex flex-col">
+          <label
+            htmlFor="titulo"
+            className="text-lg font-medium text-gray-700 mb-2"
+          >
+            Título da Postagem
+          </label>
           <input
             type="text"
-            placeholder="Titulo"
+            placeholder="Digite o título"
             name="titulo"
             required
-            className="border-2 border-slate-700 rounded p-2"
+            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={postagem.titulo}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+            onChange={(
+              e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+            ) => atualizarEstado(e)}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Texto da Postagem</label>
-          <input
-            type="text"
-            placeholder="Texto"
+
+        {/* Texto da Postagem */}
+        <div className="flex flex-col">
+          <label
+            htmlFor="texto"
+            className="text-lg font-medium text-gray-700 mb-2"
+          >
+            Texto da Postagem
+          </label>
+          <textarea
+            placeholder="Digite o conteúdo"
             name="texto"
             required
-            className="border-2 border-slate-700 rounded p-2"
+            className="border border-gray-300 rounded-lg px-4 py-3 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={postagem.texto}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+            onChange={(
+              e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+            ) => atualizarEstado(e)}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <p>Tema da Postagem</p>
+
+        {/* Tema da Postagem */}
+        <div className="flex flex-col">
+          <label className="text-lg font-medium text-gray-700 mb-2">
+            Tema da Postagem
+          </label>
           <select
             name="tema"
             id="tema"
-            className="border p-2 border-slate-800 rounded"
+            className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             onChange={(e) => buscarTemaPorId(e.currentTarget.value)}
           >
-            <option value="" selected disabled>
+            <option value="" disabled selected>
               Selecione um Tema
             </option>
-
             {temas.map((tema) => (
-              <>
-                <option value={tema.id}>{tema.descricao}</option>
-              </>
+              <option key={tema.id} value={tema.id}>
+                {tema.descricao}
+              </option>
             ))}
           </select>
         </div>
-        <button
-          type="submit"
-          className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800
-                               text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
-          disabled={carregandoTema}
-        >
-          {isLoading ? (
-            <RotatingLines
-              strokeColor="white"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="24"
-              visible={true}
-            />
-          ) : (
-            <span>{id !== undefined ? "Atualizar" : "Cadastrar"}</span>
-          )}
-        </button>
+
+        {/* Botão de Envio */}
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className={`w-full sm:w-1/2 px-6 py-3 rounded-lg text-white font-semibold text-lg focus:outline-none transition duration-300 ease-in-out ${
+              carregandoTema
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
+            disabled={carregandoTema}
+          >
+            {isLoading ? (
+              <RotatingLines
+                strokeColor="white"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="24"
+                visible={true}
+              />
+            ) : (
+              <span>{id !== undefined ? "Atualizar" : "Cadastrar"}</span>
+            )}
+          </button>
+        </div>
       </form>
     </div>
   );

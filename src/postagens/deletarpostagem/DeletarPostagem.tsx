@@ -34,7 +34,7 @@ function DeletarPostagem() {
 
   useEffect(() => {
     if (token === "") {
-      ToastAlerta("error", "Você precisa estar logado");
+      ToastAlerta("Você precisa estar logado", "erro");
       navigate("/");
     }
   }, [token]);
@@ -55,13 +55,13 @@ function DeletarPostagem() {
         },
       });
 
-      ToastAlerta("sucess", "Postagem apagada com sucesso");
+      ToastAlerta("Postagem apagada com sucesso", "sucesso");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.toString().includes("403")) {
         handleLogout();
       } else {
-        ToastAlerta("error", "Erro ao deletar a postagem.");
+        ToastAlerta("Erro ao deletar a postagem.", "erro");
       }
     }
 
@@ -74,31 +74,34 @@ function DeletarPostagem() {
   }
 
   return (
-    <div className="container w-1/3 mx-auto">
-      <h1 className="text-4xl text-center my-4">Deletar Postagem</h1>
+    <div className="container w-1/3 mx-auto mt-10">
+      <h1 className="text-4xl text-center my-4 bg-clip-text text-transparent bg-gradient-to-r from-[#7B68EE] via-[#4B0082] to-[#A020F0] font-bold">
+        Deletar Postagem
+      </h1>
 
-      <p className="text-center font-semibold mb-4">
+      <p className="text-center font-semibold mb-4 text-gray-700">
         Você tem certeza de que deseja apagar a postagem a seguir?
       </p>
 
-      <div className="border flex flex-col rounded-2xl overflow-hidden justify-between">
-        <header className="py-2 px-6 bg-indigo-600 text-white font-bold text-2xl">
+      <div className="border rounded-2xl overflow-hidden shadow-lg">
+        <header className="py-2 px-6 bg-gradient-to-r from-[#7B68EE] via-[#4B0082] to-[#A020F0] text-white font-bold text-2xl">
           Postagem
         </header>
-        <div className="p-4">
-          <p className="text-xl h-full">{postagem.titulo}</p>
-          <p>{postagem.texto}</p>
+        <div className="p-6 bg-gray-50">
+          <p className="text-xl font-semibold text-gray-800">
+            {postagem.titulo}
+          </p>
+          <p className="text-gray-600 mt-2">{postagem.texto}</p>
         </div>
         <div className="flex">
           <button
-            className="text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2"
+            className="w-1/2 text-white bg-red-400 hover:bg-red-600 py-3 font-bold transition-all duration-300"
             onClick={retornar}
           >
             Não
           </button>
           <button
-            className="w-full text-slate-100 bg-indigo-400 
-                        hover:bg-indigo-600 flex items-center justify-center"
+            className="w-1/2 text-white bg-gradient-to-r from-[#7B68EE] via-[#4B0082] to-[#A020F0] hover:opacity-80 py-3 font-bold flex items-center justify-center transition-all duration-300"
             onClick={deletarPostagem}
           >
             {isLoading ? (

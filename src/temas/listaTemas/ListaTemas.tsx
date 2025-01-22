@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
-
-import Tema from "../../../models/Tema";
-import { AuthContext } from "../../../contexts/AuthContex";
-import { buscar } from "../../../service/Service";
+import Tema from "../../models/Tema";
+import { AuthContext } from "../../contexts/AuthContex";
+import { buscar } from "../../service/Service";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 import CardTemas from "../cardTemas/CardTemas";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaTemas() {
   const navigate = useNavigate();
@@ -31,7 +30,7 @@ function ListaTemas() {
 
   useEffect(() => {
     if (token === "") {
-      ToastAlerta("error", "Você precisa estar logado!");
+      ToastAlerta("Você precisa estar logado!", "info");
       navigate("/");
     }
   }, [token]);
