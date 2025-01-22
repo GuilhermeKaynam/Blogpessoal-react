@@ -1,7 +1,9 @@
 import Tema from "./Tema";
 import Usuario from "./usuario";
 
-export default interface Postagem { 
+export default interface Postagem {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    usuario: any; 
     id: number;
     titulo: string;
     texto: string;
