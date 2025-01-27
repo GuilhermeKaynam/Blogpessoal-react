@@ -7,13 +7,10 @@ const WorkInProgress: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      {/* Container principal */}
       <div className="bg-white p-8 rounded-3xl shadow-2xl w-96 text-center space-y-6">
-        {/* Título */}
         <h1 className="text-3xl font-extrabold text-indigo-600 mb-4">
           Estamos Trabalhando Nisso
         </h1>
-        {/* Ícones e Descrição */}
         <div className="space-y-4">
           <div className="text-6xl text-indigo-500">
             <FaTools className="animate-pulse" />
@@ -24,7 +21,6 @@ const WorkInProgress: React.FC = () => {
           </p>
         </div>
 
-        {/* Informações adicionais */}
         <div className="flex justify-center items-center space-x-4 mt-6">
           <FaWrench className="text-indigo-500 text-4xl" />
           <FaCog className="text-indigo-500 text-4xl" />
